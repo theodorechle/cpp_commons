@@ -1,0 +1,37 @@
+CPP_C=g++
+CPP_FLAGS=-std=c++17 -Wall -g -MMD -MP
+BIN_DIR=bin
+OBJ_DIR=obj/lib
+SRC_DIR=src
+LIB=$(BIN_DIR)/cpp_commons_lib
+
+# Source files
+SRC_STYLE=$(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/*.cpp)
+
+# Object files
+OBJ_STYLE=$(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_STYLE))
+
+.PHONY: clean lib
+
+ifeq ($(DEBUG),1)
+CPP_FLAGS += -DDEBUG
+endif
+
+lib: $(LIB).a
+
+## LIB
+
+$(LIB).a: $(OBJ_STYLE)
+	@mkdir -p $(BIN_DIR)
+	ar -r $@ $^
+
+# Rule for compiling all object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(dir $@)
+	$(CPP_C) $(CPP_FLAGS) -c $< -o $@
+
+# Clean all generated files
+clean:
+	@find obj -mindepth 1 ! -name .gitkeep -delete
+	@find bin -mindepth 1 ! -name .gitkeep -delete
+	$(MAKE) -C cpp_tests clean
