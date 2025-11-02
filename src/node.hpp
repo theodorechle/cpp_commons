@@ -23,7 +23,7 @@ namespace commons {
 
         Derived *child() { return _child; }
         const Derived *child() const { return _child; }
-        void child(Derived *newChild) {
+        void addChild(Derived *newChild) {
             if (newChild == nullptr) return;
             if (_child == nullptr) {
                 _child = newChild;
