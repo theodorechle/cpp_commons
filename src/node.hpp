@@ -12,7 +12,11 @@ namespace commons {
         int _nbChilds = 0;
 
     public:
-        virtual ~Node() {}
+        ~Node() {
+            delete _child;
+            delete _next;
+        }
+
         Derived *parent() { return _parent; }
         const Derived *parent() const { return _parent; }
         void parent(Derived *parent) { this->_parent = parent; }
