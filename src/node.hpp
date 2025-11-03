@@ -11,7 +11,6 @@ namespace commons {
         Derived *_parent = nullptr;
         Derived *_child = nullptr;
         Derived *_next = nullptr;
-        int _nbChilds = 0;
 
         virtual std::string debugValue() const { return ""; }
 
@@ -33,14 +32,15 @@ namespace commons {
                 _child = newChild;
             }
             else {
-                Derived *child = _child;
-                for (int i = 1; i < _nbChilds; i++) {
-                    child = child->_next;
-                }
+                Derived *child;
+                Derived *nextChild = _child;
+                do {
+                    child = nextChild;
+                    nextChild = nextChild->next();
+                } while (nextChild != nullptr);
                 child->next(newChild);
             }
             newChild->parent(static_cast<Derived *>(this));
-            _nbChilds++;
         }
         void removeChilds() { _child = nullptr; }
 
@@ -48,7 +48,15 @@ namespace commons {
         const Derived *next() const { return _next; }
         void next(Derived *next) { this->_next = next; }
 
-        int nbChilds() const { return _nbChilds; }
+        int nbChilds() const {
+            size_t nbChilds = 0;
+            Derived *child = _child;
+            while (child != nullptr) {
+                nbChilds++;
+                child = child->_next;
+            }
+            return nbChilds;
+        }
 
         void debugDisplay(int indent) const {
             for (int i = 0; i < indent; i++) {
