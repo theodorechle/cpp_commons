@@ -1,6 +1,8 @@
 #ifndef TREE_HPP
 #define TREE_HPP
 
+#include <iostream>
+#include <string>
 #include <type_traits>
 
 namespace commons {
@@ -10,6 +12,8 @@ namespace commons {
         Derived *_child = nullptr;
         Derived *_next = nullptr;
         int _nbChilds = 0;
+
+        virtual std::string debugValue() const { return ""; }
 
     public:
         ~Node() {
@@ -45,6 +49,18 @@ namespace commons {
         void next(Derived *next) { this->_next = next; }
 
         int nbChilds() const { return _nbChilds; }
+
+        void debugDisplay(int indent) const {
+            for (int i = 0; i < indent; i++) {
+                std::cerr << "\t";
+            }
+            std::cerr << debugValue() << "\n";
+            const Derived *elementChild = child();
+            while (elementChild) {
+                elementChild->debugDisplay(indent + 1);
+                elementChild = elementChild->next();
+            }
+        };
     };
 } // namespace commons
 
