@@ -16,7 +16,7 @@ namespace commons {
         virtual std::string debugValue() const { return ""; }
 
     public:
-        ~Node() {
+        virtual ~Node() {
             delete _child;
             delete _next;
         }
