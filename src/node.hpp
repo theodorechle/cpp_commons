@@ -22,12 +22,15 @@ namespace commons {
 
         Derived *parent() { return _parent; }
         const Derived *parent() const { return _parent; }
-        void parent(Derived *parent) { this->_parent = parent; }
+        Derived *parent(Derived *parent) {
+            this->_parent = parent;
+            return parent;
+        }
 
         Derived *child() { return _child; }
         const Derived *child() const { return _child; }
-        void addChild(Derived *newChild) {
-            if (newChild == nullptr) return;
+        Derived *addChild(Derived *newChild) {
+            if (newChild == nullptr) return nullptr;
             if (_child == nullptr) {
                 _child = newChild;
             }
@@ -41,12 +44,17 @@ namespace commons {
                 child->next(newChild);
             }
             newChild->parent(static_cast<Derived *>(this));
+            return newChild;
         }
         void removeChilds() { _child = nullptr; }
 
         Derived *next() { return _next; }
         const Derived *next() const { return _next; }
-        void next(Derived *next) { this->_next = next; }
+        Derived *next(Derived *next) {
+            _next = next;
+            if (_next != nullptr) _next->parent(parent());
+            return next;
+        }
 
         int nbChilds() const {
             size_t nbChilds = 0;
