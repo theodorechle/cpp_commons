@@ -66,14 +66,14 @@ namespace commons {
             return nbChilds;
         }
 
-        void debugDisplay(int indent) const {
+        void debugDisplay(std::ostream &flow = std::cerr, int indent = 0) const {
             for (int i = 0; i < indent; i++) {
-                std::cerr << "\t";
+                flow << "\t";
             }
-            std::cerr << debugValue() << "\n";
+            flow << debugValue() << "\n";
             const Derived *elementChild = child();
             while (elementChild) {
-                elementChild->debugDisplay(indent + 1);
+                elementChild->debugDisplay(flow, indent + 1);
                 elementChild = elementChild->next();
             }
         };
