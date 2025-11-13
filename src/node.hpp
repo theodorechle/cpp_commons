@@ -1,11 +1,15 @@
-#ifndef TREE_HPP
-#define TREE_HPP
+#ifndef NODE_HPP
+#define NODE_HPP
 
 #include <iostream>
 #include <string>
 #include <type_traits>
 
 namespace commons {
+    /*
+    A basic node class to create trees.
+    The template parameter is to be able to take and return the child class type directly instead of needing a cast for every call.
+    */
     template <typename Derived>
     class Node {
         Derived *_parent = nullptr;
@@ -80,4 +84,4 @@ namespace commons {
     };
 } // namespace commons
 
-#endif // TREE_HPP
+#endif // NODE_HPP
