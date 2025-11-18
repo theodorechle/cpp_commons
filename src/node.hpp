@@ -16,6 +16,7 @@ namespace commons {
         Derived *_child = nullptr;
         Derived *_next = nullptr;
 
+    protected:
         virtual std::string debugValue() const { return ""; }
 
     public:
