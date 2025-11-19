@@ -20,6 +20,8 @@ namespace commons {
         virtual std::string debugValue() const { return ""; }
 
     public:
+        Node(Derived *child = nullptr, Derived *next = nullptr) : _child{child}, _next{next} {}
+
         virtual ~Node() {
             delete _child;
             delete _next;
