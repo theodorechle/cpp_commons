@@ -73,6 +73,28 @@ namespace commons {
             return nbChilds;
         }
 
+        Derived *getLastChild() {
+            Derived *childNode = child();
+            Derived *nextChild = childNode;
+            while (nextChild != nullptr) {
+                childNode = nextChild;
+                nextChild = nextChild->next();
+            }
+            return childNode;
+        }
+
+        Derived *getSpecificChild(int childNumber) {
+            Derived *childNode = child();
+            childNumber--;
+
+            while (childNumber > 0) {
+                if (childNode == nullptr) return nullptr;
+                childNode = childNode->next();
+                childNumber--;
+            }
+            return childNode;
+        }
+
         void debugDisplay(std::ostream &flow = std::cerr, int indent = 0) const {
             for (int i = 0; i < indent; i++) {
                 flow << "\t";
