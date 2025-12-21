@@ -85,7 +85,6 @@ namespace commons {
 
         Derived *getSpecificChild(int childNumber) {
             Derived *childNode = child();
-            childNumber--;
 
             while (childNumber > 0) {
                 if (childNode == nullptr) return nullptr;
