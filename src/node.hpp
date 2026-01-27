@@ -16,9 +16,6 @@ namespace commons {
         Derived *_child = nullptr;
         Derived *_next = nullptr;
 
-    protected:
-        virtual std::string debugValue() const { return ""; }
-
     public:
         Node(Derived *child = nullptr, Derived *next = nullptr) : _child{child}, _next{next} {}
 
@@ -94,7 +91,9 @@ namespace commons {
             return childNode;
         }
 
-        void debugDisplay(std::ostream &flow = std::cerr, int indent = 0) const {
+        virtual std::string debugValue() const { return ""; }
+
+        virtual void debugDisplay(std::ostream &flow = std::cerr, int indent = 0) const {
             for (int i = 0; i < indent; i++) {
                 flow << "\t";
             }
