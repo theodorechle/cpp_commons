@@ -93,7 +93,7 @@ namespace commons {
 
         virtual std::string debugValue() const { return ""; }
 
-        virtual void debugDisplay(std::ostream &flow = std::cerr, int indent = 0) const {
+        virtual void debugDisplay(std::ostream &flow = std::clog, int indent = 0) const {
             for (int i = 0; i < indent; i++) {
                 flow << "\t";
             }
