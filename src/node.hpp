@@ -49,7 +49,7 @@ namespace commons {
             newChild->parent(static_cast<Derived *>(this));
             return newChild;
         }
-        void removeChilds() { _child = nullptr; }
+        void removeChildren() { _child = nullptr; }
 
         Derived *next() { return _next; }
         const Derived *next() const { return _next; }
@@ -59,14 +59,14 @@ namespace commons {
             return next;
         }
 
-        int nbChilds() const {
-            size_t nbChilds = 0;
+        int nbChildren() const {
+            size_t nbChildren = 0;
             Derived *child = _child;
             while (child != nullptr) {
-                nbChilds++;
+                nbChildren++;
                 child = child->_next;
             }
-            return nbChilds;
+            return nbChildren;
         }
 
         Derived *getLastChild() {
