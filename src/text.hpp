@@ -9,5 +9,6 @@ namespace commons {
 
     size_t longestLineSize(const std::list<std::string> &lines);
 
-    void showDiff(const std::string &firstText, const std::string &secondText, std::ostream &flow = std::clog);
+    void showDiff(const std::string &firstText, const std::string &secondText, const std::string &firstTitle, const std::string &secondTitle,
+                  std::ostream &flow = std::clog);
 }

@@ -21,9 +21,13 @@ namespace commons {
         return longestSize;
     }
 
-    void showDiff(const std::string &firstText, const std::string &secondText, std::ostream &flow) {
+    void showDiff(const std::string &firstText, const std::string &secondText, const std::string &firstTitle, const std::string &secondTitle,
+                  std::ostream &flow) {
         std::list<std::string> firstNodeLines = textToLines(firstText);
+        firstNodeLines.push_front(firstTitle);
+
         std::list<std::string> secondNodeLines = textToLines(secondText);
+        secondNodeLines.push_front(secondTitle);
 
         size_t longestLineSizeFirstString = longestLineSize(firstNodeLines);
 
