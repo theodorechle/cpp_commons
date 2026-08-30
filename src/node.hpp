@@ -92,9 +92,9 @@ namespace commons {
 
         virtual std::string debugValue() const { return ""; }
 
-        virtual void debugDisplay(std::ostream &flow = std::clog, int indent = 0) const {
+        void debugDisplay(std::ostream &flow = std::clog, int indent = 0) const {
             for (int i = 0; i < indent; i++) {
-                flow << "\t";
+                flow << "    ";
             }
             flow << debugValue() << "\n";
             const Derived *elementChild = child();

@@ -6,10 +6,10 @@ SRC_DIR=src
 LIB=$(BIN_DIR)/cpp_commons_lib
 
 # Source files
-SRC_STYLE=$(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/*.cpp)
+SRC=$(wildcard $(SRC_DIR)/*.cpp)
 
 # Object files
-OBJ_STYLE=$(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_STYLE))
+OBJ=$(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
 .PHONY: clean lib
 
@@ -21,7 +21,7 @@ lib: $(LIB).a
 
 ## LIB
 
-$(LIB).a: $(OBJ_STYLE)
+$(LIB).a: $(OBJ)
 	@mkdir -p $(BIN_DIR)
 	ar -r $@ $^
 
@@ -34,4 +34,3 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 clean:
 	@find obj -mindepth 1 ! -name .gitkeep -delete
 	@find bin -mindepth 1 ! -name .gitkeep -delete
-	$(MAKE) -C cpp_tests clean
