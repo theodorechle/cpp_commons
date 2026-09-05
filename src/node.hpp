@@ -30,6 +30,14 @@ namespace commons {
             return parent;
         }
 
+        void setParentForCurrentAndNexts(Derived *parent) {
+            Node<Derived> *node = this;
+            while (node != nullptr) {
+                node->parent(parent);
+                node = node->next();
+            }
+        }
+
         Derived *child() { return _child; }
         const Derived *child() const { return _child; }
         Derived *addChild(Derived *newChild) {
@@ -49,6 +57,7 @@ namespace commons {
             newChild->parent(static_cast<Derived *>(this));
             return newChild;
         }
+
         void removeChildren() { _child = nullptr; }
 
         Derived *next() { return _next; }
@@ -56,6 +65,18 @@ namespace commons {
         Derived *next(Derived *next) {
             _next = next;
             if (_next != nullptr) _next->parent(parent());
+            return next;
+        }
+
+        // append the given node after the last next
+        Derived *appendNext(Derived *next) {
+            if (next == nullptr) return next;
+            Node<Derived> *c = this;
+            while (c->next() != nullptr) {
+                c = c->next();
+            }
+            c->next(next);
+            next->setParentForCurrentAndNexts(parent());
             return next;
         }
 
